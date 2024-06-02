@@ -29,10 +29,10 @@ async function run() {
     });
 
     try {
-        const workCollection = client.db('spotDB').collection('spot');
+        const tourCollection = client.db('spotDB').collection('spot');
 
         app.get('/spot', async (req, res) => {
-            const allWork = await workCollection.find({}).toArray();
+            const allWork = await tourCollection.find({}).toArray();
             res.json(allWork);
         });
 
@@ -42,7 +42,7 @@ async function run() {
                 return res.status(400).json({ error: 'Invalid ID format' });
             }
             const query = { _id: new ObjectId(id) };
-            const result = await workCollection.findOne(query);
+            const result = await tourCollection.findOne(query);
             if (!result) {
                 return res.status(404).json({ error: 'Work not found' });
             }
@@ -51,7 +51,7 @@ async function run() {
 
         app.post('/spot', async (req, res) => {
             const newWork = req.body;
-            const result = await workCollection.insertOne(newWork);
+            const result = await tourCollection.insertOne(newWork);
             res.json(result);
         });
 
@@ -63,7 +63,7 @@ async function run() {
             const updatedWork = req.body;
             const query = { _id: new ObjectId(id) };
             const options = { upsert: true };
-            const result = await workCollection.replaceOne(query, updatedWork, options);
+            const result = await tourCollection.replaceOne(query, updatedWork, options);
             res.json(result);
         });
 
@@ -73,7 +73,7 @@ async function run() {
                 return res.status(400).json({ error: 'Invalid ID format' });
             }
             const query = { _id: new ObjectId(id) };
-            const result = await workCollection.deleteOne(query);
+            const result = await tourCollection.deleteOne(query);
             res.json(result);
         });
 
