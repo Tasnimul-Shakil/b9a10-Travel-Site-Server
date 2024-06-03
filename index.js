@@ -7,7 +7,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 const corsOptions = {
-    origin: ['https://b9a10-tourism-website.web.app'],
+    origin: ['http://localhost:5173'],
     credentials: true,
     optionSuccessStatus: 200,
 };
@@ -56,6 +56,20 @@ async function run() {
             const result = await tourCollection.insertOne(newWork);
             res.json(result);
         });
+
+        app.post('/profile/:email', async (req, res) => {
+            try {
+                const email = req.params.email;
+                console.log(email);
+                const result = await tourCollection.find({ email: email }).toArray();
+                res.json(result);
+            } catch (error) {
+                console.error(error);
+                res.status(500).json({ error: 'Internal Server Error' });
+            }
+        });
+        
+        
 
         app.put('/spot/:id', async (req, res) => {
             const id = req.params.id;
