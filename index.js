@@ -57,17 +57,16 @@ async function run() {
             res.json(result);
         });
 
-        app.post('/profile/:email', async (req, res) => {
+        app.get('/profile/:email', async (req, res) => {
+            const userEmail = req.params.email;
             try {
-                const email = req.params.email;
-                console.log(email);
-                const result = await tourCollection.find({ email: email }).toArray();
-                res.json(result);
+              const userCards = await collection.find({ user_email: userEmail }).toArray();
+              res.json(userCards);
             } catch (error) {
-                console.error(error);
-                res.status(500).json({ error: 'Internal Server Error' });
+              res.status(500).send('Error retrieving data');
             }
-        });
+          });
+          
         
         
 
