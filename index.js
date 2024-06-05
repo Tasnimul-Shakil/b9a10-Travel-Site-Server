@@ -7,7 +7,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 const corsOptions = {
-    origin: ['http://localhost:5173'],
+    origin: ['https://b9a10-tourism-website.web.app'],
     credentials: true,
     optionSuccessStatus: 200,
 };
