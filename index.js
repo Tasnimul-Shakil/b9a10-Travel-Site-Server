@@ -11,8 +11,6 @@ const corsOptions = {
     credentials: true,
     optionSuccessStatus: 200,
 };
-// DB_USER=coffeeMaster
-// DB_PASS=QvOPQCfOoQv9sDQO
 
 app.use(cors(corsOptions));
 app.use(express.json());
